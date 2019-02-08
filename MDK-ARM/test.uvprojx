@@ -337,7 +337,7 @@
               <MiscControls />
               <Define>USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine />
-              <IncludePath>../Inc;               ../Drivers/STM32H7xx_HAL_Driver/Inc;               ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;               ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;               ../Drivers/CMSIS/Include;               ..\MDK-ARM</IncludePath>
+              <IncludePath>../Inc;                ../Drivers/STM32H7xx_HAL_Driver/Inc;                ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;                ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;                ../Drivers/CMSIS/Include;                ..\MDK-ARM</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
