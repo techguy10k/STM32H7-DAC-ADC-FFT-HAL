@@ -9,7 +9,7 @@ typedef struct
 {
 	uint8_t DAC_Status;
 	uint8_t DAC_Plotting_Bank;
-	uint32_t DAC_Plot_Counter;
+	int32_t DAC_Plot_Counter;
 }DACStatus_Typedef;
 
 #define DAC_Status_Idle 0
