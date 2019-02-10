@@ -72,8 +72,10 @@
 
 /* USER CODE BEGIN PV */
 uint8_t usart2_rec[2];
-extern int16_t plot_table[];
 
+extern int16_t Plot_Bank0[250];
+extern int16_t Plot_Bank1[250];
+extern DACStatus_Typedef DAC_Status;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -140,9 +142,13 @@ int main(void)
 	HAL_UART_Receive_IT(&huart2,usart2_rec,2);
 	HAL_TIM_Base_Start(&htim6);
 	
-	dac_gomid();
-	dac_plot(plot_table,500,0.000020);
-	dac_run(plot_table);
+	dac_plot_countinue(Plot_Bank0,250,0.00002,&DAC_Status);
+	
+	dac_gomid(&hdac1);
+	HAL_Delay(1000);
+	
+	DAC_Status.DAC_Plotting_Bank = DAC_Plotting_Bank_Bank1;
+	DAC_Status.DAC_Status = DAC_Status_Busy;
 	
   /* USER CODE END 2 */
 
