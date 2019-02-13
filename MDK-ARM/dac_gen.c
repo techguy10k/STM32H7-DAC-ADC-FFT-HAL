@@ -171,8 +171,8 @@ int16_t* dac_plot_countinue(int16_t *addr,uint16_t lenth,double timebase,DACStat
 	for(plot_counter = 0;plot_counter < lenth;plot_counter ++)
 	{
 		addr[plot_counter] = 2048;            //直流偏置电压 小心这玩意坑你
-		addr[plot_counter] += (int16_t)(500*sin((double)(Status->DAC_Plot_Counter)*timebase*3142.0));   //500Hz正弦信号
-		addr[plot_counter] += (int16_t)(500*sin((double)(Status->DAC_Plot_Counter)*timebase*7540.5));   //1200Hz正弦信号
+//		addr[plot_counter] += (int16_t)(500*sin((double)(Status->DAC_Plot_Counter)*timebase*3142.0));   //500Hz正弦信号
+//		addr[plot_counter] += (int16_t)(500*sin((double)(Status->DAC_Plot_Counter)*timebase*7540.5));   //1200Hz正弦信号
 		Status->DAC_Plot_Counter ++;
 	}
 	

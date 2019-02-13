@@ -40,6 +40,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "dac.h"
 #include "dma.h"
 #include "tim.h"
@@ -72,6 +73,8 @@
 
 /* USER CODE BEGIN PV */
 uint8_t usart2_rec[2];
+uint32_t adc_val = 0;
+
 
 extern int16_t Plot_Bank0[250];
 extern int16_t Plot_Bank1[250];
@@ -138,13 +141,16 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM6_Init();
   MX_DAC1_Init();
+  MX_ADC2_Init();
   /* USER CODE BEGIN 2 */
 	HAL_UART_Receive_IT(&huart2,usart2_rec,2);
 	HAL_TIM_Base_Start(&htim6);
 	
+	HAL_ADCEx_Calibration_Start(&hadc2,ADC_CALIB_OFFSET_LINEARITY,ADC_SINGLE_ENDED);
+	
 	dac_plot_countinue(Plot_Bank0,250,0.00002,&DAC_Status);
 	
-	dac_gomid(&hdac1);
+	dac_gomid(&hdac1);	
 	HAL_Delay(1000);
 	
 	DAC_Status.DAC_Plotting_Bank = DAC_Plotting_Bank_Bank1;
@@ -159,6 +165,9 @@ int main(void)
 		
 		HAL_Delay(500);
 		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+		HAL_ADC_Start(&hadc2);
+		HAL_ADC_PollForConversion(&hadc2,1000);
+		adc_val = HAL_ADC_GetValue(&hadc2);
 		
 //		dac_run(plot_table);
 //		while(1);
@@ -193,8 +202,10 @@ void SystemClock_Config(void)
   }
   /**Initializes the CPU, AHB and APB busses clocks 
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSE;
   RCC_OscInitStruct.HSEState = RCC_HSE_BYPASS;
+  RCC_OscInitStruct.HSIState = RCC_HSI_DIV4;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 1;
@@ -226,8 +237,11 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_ADC
+                              |RCC_PERIPHCLK_CKPER;
+  PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
   PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
+  PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_CLKP;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();

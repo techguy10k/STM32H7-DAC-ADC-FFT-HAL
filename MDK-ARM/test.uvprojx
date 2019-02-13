@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;                   ../Drivers/STM32H7xx_HAL_Driver/Inc;                   ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;                   ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;                   ../Drivers/CMSIS/Include;                   ..\MDK-ARM</IncludePath>
+              <IncludePath>../Inc;                        ../Drivers/STM32H7xx_HAL_Driver/Inc;                        ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;                        ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;                        ../Drivers/CMSIS/Include;                        ..\MDK-ARM</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -404,6 +404,11 @@
               <FilePath>../Src/gpio.c</FilePath>
             </File>
             <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Src/adc.c</FilePath>
+            </File>
+            <File>
               <FileName>dac.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Src/dac.c</FilePath>
@@ -438,6 +443,16 @@
         <Group>
           <GroupName>Drivers/STM32H7xx_HAL_Driver</GroupName>
           <Files>
+            <File>
+              <FileName>stm32h7xx_hal_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32h7xx_hal_adc_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c</FilePath>
+            </File>
             <File>
               <FileName>stm32h7xx_hal_cortex.c</FileName>
               <FileType>1</FileType>

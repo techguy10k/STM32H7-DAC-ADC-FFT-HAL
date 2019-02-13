@@ -1,12 +1,12 @@
-./test/dac_gen.o: dac_gen.c ../MDK-ARM/dac_gen.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h ../Inc\dac.h \
-  ../Inc/main.h ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal.h \
+./test/adc.o: ../Src/adc.c ../Inc\adc.h ../Inc/main.h \
+  ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal.h \
   ../Inc\stm32h7xx_hal_conf.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_rcc.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h \
   ../Drivers/CMSIS/Device/ST/STM32H7xx/Include\stm32h7xx.h \
   ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h743xx.h \
   ../Drivers/CMSIS/Include\core_cm7.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
   ../Drivers/CMSIS/Include/cmsis_compiler.h \
   ../Drivers/CMSIS/Include/cmsis_armclang.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
@@ -35,5 +35,4 @@
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_tim.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_uart.h \
-  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h
+  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h

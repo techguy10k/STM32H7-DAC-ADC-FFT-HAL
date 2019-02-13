@@ -20,6 +20,8 @@
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_dma.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma_ex.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_cortex.h \
+  ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_adc.h \
+  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc_ex.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_dac.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dac_ex.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_flash.h \
@@ -34,5 +36,6 @@
   ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal_uart.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
-  ../Inc\dac.h ../Inc\dma.h ../Inc\tim.h ../Inc\usart.h ../Inc\gpio.h \
-  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h ../MDK-ARM\dac_gen.h
+  ../Inc\adc.h ../Inc\dac.h ../Inc\dma.h ../Inc\tim.h ../Inc\usart.h \
+  ../Inc\gpio.h C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
+  ../MDK-ARM\dac_gen.h
