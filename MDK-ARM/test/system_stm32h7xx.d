@@ -6,6 +6,7 @@
   ../Drivers/CMSIS/Include/cmsis_compiler.h \
   ../Drivers/CMSIS/Include/cmsis_armclang.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
   ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h \
   ../Drivers/STM32H7xx_HAL_Driver/Inc\stm32h7xx_hal.h \
   ../Inc\stm32h7xx_hal_conf.h \
