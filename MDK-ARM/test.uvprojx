@@ -56,8 +56,8 @@
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath></ListingPath>
-          <HexFormatSelection>1</HexFormatSelection>
+          <ListingPath>.\test\</ListingPath>
+          <HexFormatSelection>0</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
           <BeforeCompile>
@@ -121,7 +121,7 @@
         </DllOption>
         <DebugOption>
           <OPTHX>
-            <HexSelection>1</HexSelection>
+            <HexSelection>0</HexSelection>
             <HexRangeLowAddress>0</HexRangeLowAddress>
             <HexRangeHighAddress>0</HexRangeHighAddress>
             <HexOffset>0</HexOffset>
@@ -135,10 +135,10 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4100</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
-          <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
+          <Flash2>BIN\UL2CM3.DLL</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;                        ../Drivers/STM32H7xx_HAL_Driver/Inc;                        ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;                        ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;                        ../Drivers/CMSIS/Include;                        ..\MDK-ARM</IncludePath>
+              <IncludePath>../Inc;                                               ../Drivers/STM32H7xx_HAL_Driver/Inc;                                               ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;                                               ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;                                               ../Drivers/CMSIS/Include;                                               ..\MDK-ARM</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
