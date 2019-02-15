@@ -313,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>6</Optim>
+            <Optim>7</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;                                               ../Drivers/STM32H7xx_HAL_Driver/Inc;                                               ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;                                               ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;                                               ../Drivers/CMSIS/Include;                                               ..\MDK-ARM</IncludePath>
+              <IncludePath>../Inc;                                                    ../Drivers/STM32H7xx_HAL_Driver/Inc;                                                    ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;                                                    ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;                                                    ../Drivers/CMSIS/Include;                                                    ..\MDK-ARM</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

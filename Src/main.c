@@ -73,8 +73,7 @@
 
 /* USER CODE BEGIN PV */
 uint8_t usart2_rec[2];
-uint32_t adc_val = 0;
-uint16_t adc_plot[50] = {0};
+uint16_t adc_plot[64] = {0};
 
 
 extern int16_t Plot_Bank0[250];
@@ -108,17 +107,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
 	}
 }
 
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef * hadc)
+
+/*
+	特别注意，如果使用DMA来给ADC传输数据，则callback是
+	errorcallback而不是常规的convcpltcallback
+	ADC+DMA应该使用errorcallback
+*/
+void HAL_ADC_ErrorCallback(ADC_HandleTypeDef * hadc)
 {
-	if(hadc->Instance == hadc2.Instance)
+	if(hadc->Instance == ADC2)
 	{
-		HAL_ADC_Stop_DMA(&hadc2);
-		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+		//调用该函数有清overrun标志位作用 详见HAL文档
+		HAL_ADC_Stop_DMA(hadc);
 	}
 }
-
-
-
 
 
 /* USER CODE END 0 */
@@ -164,7 +166,6 @@ int main(void)
 	HAL_TIM_Base_Start(&htim3);
 	
 	HAL_ADCEx_Calibration_Start(&hadc2,ADC_CALIB_OFFSET_LINEARITY,ADC_SINGLE_ENDED);
-	HAL_ADC_Stop_DMA(&hadc2);
 	
 	dac_plot_countinue(Plot_Bank0,250,0.00002,&DAC_Status);
 	
@@ -183,7 +184,7 @@ int main(void)
 		
 		HAL_Delay(500);
 		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-		HAL_ADC_Start_DMA(&hadc2,(uint32_t*)adc_plot,50);
+		HAL_ADC_Start_DMA(&hadc2,(uint32_t*)adc_plot,64);
 		
 //		dac_run(plot_table);
 //		while(1);
@@ -216,9 +217,6 @@ void SystemClock_Config(void)
   {
     
   }
-  /**Macro to configure the PLL clock source 
-  */
-  __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSI);
   /**Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
@@ -255,17 +253,11 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_ADC;
-  PeriphClkInitStruct.PLL2.PLL2M = 4;
-  PeriphClkInitStruct.PLL2.PLL2N = 12;
-  PeriphClkInitStruct.PLL2.PLL2P = 16;
-  PeriphClkInitStruct.PLL2.PLL2Q = 2;
-  PeriphClkInitStruct.PLL2.PLL2R = 2;
-  PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
-  PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOWIDE;
-  PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_ADC
+                              |RCC_PERIPHCLK_CKPER;
+  PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
   PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
-  PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL2;
+  PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_CLKP;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     Error_Handler();
