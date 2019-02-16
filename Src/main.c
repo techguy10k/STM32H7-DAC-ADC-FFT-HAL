@@ -49,6 +49,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
 #include "stdlib.h"
 #include "dac_gen.h"
 
@@ -72,8 +73,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t usart2_rec[2];
-uint16_t adc_plot[64] = {0};
+int16_t adc_plot[64] = {0};
+uint16_t string_counter = 0;
+
 
 
 extern int16_t Plot_Bank0[250];
@@ -98,18 +100,30 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 }
 
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef* huart)
+
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif 
+
+int fputc(int ch,FILE *f)
 {
-	if(huart->Instance == USART2)
-	{
-		HAL_UART_Transmit_DMA(&huart2,(uint8_t*)("PWM Uptate\n"),sizeof("PWM Uptate\n"));
-		HAL_UART_Receive_IT(&huart2,usart2_rec,2);
-	}
+    uint8_t temp[1]={ch};
+    HAL_UART_Transmit(&huart3,temp,1,10);        //UartHandle是串口的句柄
+		return ch;
+}
+
+
+PUTCHAR_PROTOTYPE
+{
+	HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,10);
+	return ch;
 }
 
 
 /*
-	特别注意，如果使用DMA来给ADC传输数据，则callback是
+	特别注意，如果使用DMA来给ADC传输数据，则callback应该�?
 	errorcallback而不是常规的convcpltcallback
 	ADC+DMA应该使用errorcallback
 */
@@ -117,10 +131,13 @@ void HAL_ADC_ErrorCallback(ADC_HandleTypeDef * hadc)
 {
 	if(hadc->Instance == ADC2)
 	{
-		//调用该函数有清overrun标志位作用 详见HAL文档
+		//调用该函数有清overrun标志位作�? 详见HAL文档
 		HAL_ADC_Stop_DMA(hadc);
 	}
 }
+
+
+
 
 
 /* USER CODE END 0 */
@@ -154,13 +171,14 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_USART2_UART_Init();
   MX_TIM6_Init();
   MX_DAC1_Init();
   MX_ADC2_Init();
   MX_TIM3_Init();
+  MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-	HAL_UART_Receive_IT(&huart2,usart2_rec,2);
+	
+	
 	
 	HAL_TIM_Base_Start(&htim6);
 	HAL_TIM_Base_Start(&htim3);
@@ -185,6 +203,14 @@ int main(void)
 		HAL_Delay(500);
 		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
 		HAL_ADC_Start_DMA(&hadc2,(uint32_t*)adc_plot,64);
+		
+		han_win(adc_plot,64);
+		
+		for(string_counter = 0;string_counter < 64;string_counter ++)
+		{
+			printf("%d\r\n",adc_plot[string_counter]);
+		}
+		
 		
 //		dac_run(plot_table);
 //		while(1);
@@ -253,7 +279,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART2|RCC_PERIPHCLK_ADC
+  PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3|RCC_PERIPHCLK_ADC
                               |RCC_PERIPHCLK_CKPER;
   PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
   PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;

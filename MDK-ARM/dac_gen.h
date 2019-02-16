@@ -23,6 +23,7 @@ void dac_run(int16_t* addr);
 void dac_gomid(DAC_HandleTypeDef * dac);
 int16_t* dac_plot(int16_t *addr,uint16_t lenth,double timebase);
 int16_t* dac_plot_countinue(int16_t *addr,uint16_t lenth,double timebase,DACStatus_Typedef* Status);
+int16_t* han_win(int16_t* addr,uint16_t lenth);
 
 
 #endif

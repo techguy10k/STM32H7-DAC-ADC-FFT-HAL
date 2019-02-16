@@ -181,3 +181,27 @@ int16_t* dac_plot_countinue(int16_t *addr,uint16_t lenth,double timebase,DACStat
 	return addr;
 }
 
+
+/*
+	加窗函数
+*/
+int16_t* han_win(int16_t* addr,uint16_t lenth)
+{
+	double Wn = 0.0;
+	uint16_t counter = 0;
+	
+	for(;counter < lenth;counter ++)
+	{
+		Wn = 0.5-0.5*cos((2 * 3.1415926*((double)counter - 1))/((double)lenth - 1));
+		
+		//调试语句 记得去掉
+		addr[counter] -= 2048;
+		
+		addr[counter] = (int16_t)(Wn * (double)addr[counter]);
+	}
+	
+	return addr;
+}
+
+
+
