@@ -153,7 +153,12 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>adc_plot</ItemText>
+          <ItemText>magoutput</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>\\test\../MDK-ARM/fft.c\fast_rfft_64\magoutput[0]</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

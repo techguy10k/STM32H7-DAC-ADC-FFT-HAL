@@ -4,6 +4,6 @@
 #include "stdint.h"
 #include "arm_math.h"
 
-void fast_rfft_64(uint32_t* adc_input,float32_t* fft_output);
+void fast_rfft_64(int16_t* adc_input,float32_t* fft_output);
 
 #endif

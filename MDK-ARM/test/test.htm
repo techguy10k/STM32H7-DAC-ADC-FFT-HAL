@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\test\test.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\test\test.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6100100: Last Updated: Sun Feb 17 11:24:22 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6100100: Last Updated: Sun Feb 17 22:57:33 2019
 <BR><P>
 <H3>Maximum Stack Usage =        604 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -626,6 +626,10 @@ Global Symbols
 <P><STRONG><a name="[b]"></a>WWDG_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32h743xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32h743xx.o(RESET)
 </UL>
+<P><STRONG><a name="[11b]"></a>arm_cmplx_mag_f32</STRONG> (Thumb, 250 bytes, Stack size 0 bytes, arm_cmplx_mag_f32.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fast_rfft_64
+</UL>
+
 <P><STRONG><a name="[a8]"></a>stage_rfft_f32</STRONG> (Thumb, 170 bytes, Stack size 0 bytes, arm_rfft_fast_f32.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arm_rfft_fast_f32
 </UL>
@@ -1063,7 +1067,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c5]"></a>HAL_DAC_ConvCpltCallbackCh1</STRONG> (Thumb, 140 bytes, Stack size 24 bytes, dac_gen.o(.text.HAL_DAC_ConvCpltCallbackCh1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = HAL_DAC_ConvCpltCallbackCh1 &rArr; dac_plot_countinue &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; fabs
+<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = HAL_DAC_ConvCpltCallbackCh1 &rArr; dac_plot_countinue &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; fabs
 </UL>
 <BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dac_plot_countinue
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dac_gomid
@@ -1373,7 +1377,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Init
 </UL>
 
-<P><STRONG><a name="[11d]"></a>HAL_TIM_Base_Start</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32h7xx_hal_tim.o(.text.HAL_TIM_Base_Start))
+<P><STRONG><a name="[11e]"></a>HAL_TIM_Base_Start</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32h7xx_hal_tim.o(.text.HAL_TIM_Base_Start))
 <BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1591,8 +1595,8 @@ Global Symbols
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DAC_ConvCpltCallbackCh1
 </UL>
 
-<P><STRONG><a name="[e1]"></a>dac_plot_countinue</STRONG> (Thumb, 120 bytes, Stack size 48 bytes, dac_gen.o(.text.dac_plot_countinue))
-<BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = dac_plot_countinue &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; fabs
+<P><STRONG><a name="[e1]"></a>dac_plot_countinue</STRONG> (Thumb, 176 bytes, Stack size 56 bytes, dac_gen.o(.text.dac_plot_countinue))
+<BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = dac_plot_countinue &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; fabs
 </UL>
 <BR>[Calls]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
 </UL>
@@ -1600,11 +1604,12 @@ Global Symbols
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DAC_ConvCpltCallbackCh1
 </UL>
 
-<P><STRONG><a name="[119]"></a>fast_rfft_64</STRONG> (Thumb, 74 bytes, Stack size 296 bytes, fft.o(.text.fast_rfft_64))
+<P><STRONG><a name="[119]"></a>fast_rfft_64</STRONG> (Thumb, 84 bytes, Stack size 296 bytes, fft.o(.text.fast_rfft_64))
 <BR><BR>[Stack]<UL><LI>Max Depth = 580<LI>Call Chain = fast_rfft_64 &rArr; arm_rfft_fast_f32 &rArr; arm_cfft_f32 &rArr; arm_cfft_radix8by4_f32 &rArr; arm_radix8_butterfly_f32
 </UL>
 <BR>[Calls]<UL><LI><a href="#[11a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arm_rfft_fast_init_f32
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arm_rfft_fast_f32
+<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;arm_cmplx_mag_f32
 <LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1615,19 +1620,17 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
-</UL>
 <BR>[Address Reference Count : 1]<UL><LI> printfa.o(i.__0printf)
 </UL>
-<P><STRONG><a name="[11b]"></a>han_win</STRONG> (Thumb, 128 bytes, Stack size 48 bytes, dac_gen.o(.text.han_win))
+<P><STRONG><a name="[11c]"></a>han_win</STRONG> (Thumb, 128 bytes, Stack size 48 bytes, dac_gen.o(.text.han_win))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232<LI>Call Chain = han_win &rArr; __hardfp_cos &rArr; __ieee754_rem_pio2 &rArr; fabs
 </UL>
-<BR>[Calls]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
+<BR>[Calls]<UL><LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 328 bytes, Stack size 24 bytes, main.o(.text.main))
+<P><STRONG><a name="[95]"></a>main</STRONG> (Thumb, 256 bytes, Stack size 24 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 604<LI>Call Chain = main &rArr; fast_rfft_64 &rArr; arm_rfft_fast_f32 &rArr; arm_cfft_f32 &rArr; arm_cfft_radix8by4_f32 &rArr; arm_radix8_butterfly_f32
 </UL>
 <BR>[Calls]<UL><LI><a href="#[119]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fast_rfft_64
@@ -1639,16 +1642,15 @@ Global Symbols
 <LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_DMA_Init
 <LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_DAC1_Init
 <LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_ADC2_Init
-<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start
+<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_TIM_Base_Start
 <LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_TogglePin
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADC_Start_DMA
 <LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_ADCEx_Calibration_Start
-<LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;han_win
+<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;han_win
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dac_plot_countinue
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dac_gomid
-<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;puts
-<LI><a href="#[11e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[11f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
@@ -1658,7 +1660,7 @@ Global Symbols
 
 <P><STRONG><a name="[140]"></a>__1printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf), UNUSED)
 
-<P><STRONG><a name="[11e]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf))
+<P><STRONG><a name="[11f]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1674,7 +1676,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_sin
 </UL>
 
-<P><STRONG><a name="[11c]"></a>__hardfp_cos</STRONG> (Thumb, 158 bytes, Stack size 32 bytes, cos.o(i.__hardfp_cos))
+<P><STRONG><a name="[11d]"></a>__hardfp_cos</STRONG> (Thumb, 158 bytes, Stack size 32 bytes, cos.o(i.__hardfp_cos))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = __hardfp_cos &rArr; __ieee754_rem_pio2 &rArr; fabs
 </UL>
 <BR>[Calls]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
@@ -1683,7 +1685,7 @@ Global Symbols
 <LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_invalid
 <LI><a href="#[126]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_cos
 </UL>
-<BR>[Called By]<UL><LI><a href="#[11b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;han_win
+<BR>[Called By]<UL><LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;han_win
 </UL>
 
 <P><STRONG><a name="[118]"></a>__hardfp_sin</STRONG> (Thumb, 158 bytes, Stack size 32 bytes, sin.o(i.__hardfp_sin))
@@ -1704,7 +1706,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[127]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fabs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 </UL>
 
 <P><STRONG><a name="[126]"></a>__kernel_cos</STRONG> (Thumb, 182 bytes, Stack size 48 bytes, cos_i.o(i.__kernel_cos))
@@ -1713,7 +1715,7 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[128]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__kernel_poly
 </UL>
 <BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 </UL>
 
 <P><STRONG><a name="[128]"></a>__kernel_poly</STRONG> (Thumb, 112 bytes, Stack size 0 bytes, poly.o(i.__kernel_poly))
@@ -1729,12 +1731,12 @@ Global Symbols
 <LI><a href="#[12a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_underflow
 </UL>
 <BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 </UL>
 
 <P><STRONG><a name="[123]"></a>__mathlib_dbl_invalid</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, dunder.o(i.__mathlib_dbl_invalid))
 <BR><BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 </UL>
 
 <P><STRONG><a name="[12a]"></a>__mathlib_dbl_underflow</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, dunder.o(i.__mathlib_dbl_underflow))
@@ -1749,21 +1751,13 @@ Global Symbols
 
 <P><STRONG><a name="[122]"></a>__set_errno</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, errno.o(i.__set_errno))
 <BR><BR>[Called By]<UL><LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_sin
-<LI><a href="#[11c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
+<LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_cos
 </UL>
 
 <P><STRONG><a name="[127]"></a>fabs</STRONG> (Thumb, 24 bytes, Stack size 8 bytes, fabs.o(i.fabs))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = fabs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ieee754_rem_pio2
-</UL>
-
-<P><STRONG><a name="[11f]"></a>puts</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, puts.o(i.puts))
-<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = puts &rArr; fputc &rArr; HAL_UART_Transmit &rArr; UART_WaitOnFlagUntilTimeout
-</UL>
-<BR>[Calls]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
-</UL>
-<BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 <P>
 <H3>
@@ -1776,7 +1770,7 @@ Local Symbols
 </UL>
 
 <P><STRONG><a name="[9f]"></a>DAC_DMAConvCpltCh1</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, stm32h7xx_hal_dac.o(.text.DAC_DMAConvCpltCh1))
-<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = DAC_DMAConvCpltCh1 &rArr; HAL_DAC_ConvCpltCallbackCh1 &rArr; dac_plot_countinue &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; fabs
+<BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = DAC_DMAConvCpltCh1 &rArr; HAL_DAC_ConvCpltCallbackCh1 &rArr; dac_plot_countinue &rArr; __hardfp_sin &rArr; __ieee754_rem_pio2 &rArr; fabs
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_DAC_ConvCpltCallbackCh1
 </UL>
