@@ -13,4 +13,4 @@
 ## 软件平台
 * MDK5 + CubeMX  
 ## 编译设置
-* 采用ARMCLANG 也就是V6.9  
+* 采用ARMCLANG 也就是V6.10.1  
