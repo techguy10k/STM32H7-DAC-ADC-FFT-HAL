@@ -52,6 +52,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "dac_gen.h"
+#include "fft.h"
 
 /* USER CODE END Includes */
 
@@ -75,6 +76,7 @@
 /* USER CODE BEGIN PV */
 int16_t adc_plot[64] = {0};
 uint16_t string_counter = 0;
+float fftouttable[64] = {0};
 
 
 
@@ -204,13 +206,26 @@ int main(void)
 		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
 		HAL_ADC_Start_DMA(&hadc2,(uint32_t*)adc_plot,64);
 		
+		//延迟等待一次ADC完成
+		HAL_Delay(100);
+		
 		han_win(adc_plot,64);
 		
 		for(string_counter = 0;string_counter < 64;string_counter ++)
 		{
 			printf("%d\r\n",adc_plot[string_counter]);
 		}
+		printf("Hanning Win output over.\r\n");
 		
+		
+		fast_rfft_64((uint32_t*)adc_plot,fftouttable);
+		
+		for(string_counter = 0;string_counter < 64;string_counter ++)
+		{
+			printf("%f\r\n",fftouttable[string_counter]);
+		}
+		
+		while(1);
 		
 //		dac_run(plot_table);
 //		while(1);

@@ -38,4 +38,7 @@
   ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
   ../Inc\adc.h ../Inc\dac.h ../Inc\dma.h ../Inc\tim.h ../Inc\usart.h \
   ../Inc\gpio.h C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdlib.h \
-  ../MDK-ARM\dac_gen.h
+  ../MDK-ARM\dac_gen.h ../MDK-ARM\fft.h \
+  ../Drivers/CMSIS/DSP/Include\arm_math.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
+  C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\math.h
