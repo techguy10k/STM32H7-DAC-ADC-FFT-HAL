@@ -109,6 +109,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif 
 
+
+/* printf重定向到串口3 */
 int fputc(int ch,FILE *f)
 {
     uint8_t temp[1]={ch};
@@ -122,6 +124,40 @@ PUTCHAR_PROTOTYPE
 	HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,10);
 	return ch;
 }
+/* ********************************************* */
+
+
+///*
+//	SWO接口版本的printf函数 可以在keil调试过程中通过Debug串口输出数据
+//	但是要求是5线SWD接口 也就是有SWO的SWD接口 我们常用的4线接口不行
+//*/
+//#define ITM_Port8(n)    (*((volatile unsigned char *)(0xE0000000+4*n)))
+//#define ITM_Port16(n)   (*((volatile unsigned short*)(0xE0000000+4*n)))
+//#define ITM_Port32(n)   (*((volatile unsigned long *)(0xE0000000+4*n)))
+
+//#define DEMCR           (*((volatile unsigned long *)(0xE000EDFC)))
+//#define TRCENA          0x01000000
+
+
+//int fputc(int ch, FILE *f) {
+//  if (DEMCR & TRCENA) {
+//    while (ITM_Port32(0) == 0);
+//    ITM_Port8(0) = ch;
+//  }
+//  return(ch);
+//}
+
+
+//PUTCHAR_PROTOTYPE
+//{
+//  if (DEMCR & TRCENA) {
+//    while (ITM_Port32(0) == 0);
+//    ITM_Port8(0) = ch;
+//  }
+//  return(ch);
+//}
+///* ****************************************************** */
+
 
 
 /*
