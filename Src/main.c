@@ -128,8 +128,8 @@ PUTCHAR_PROTOTYPE
 
 
 ///*
-//	SWO接口版本的printf函数 可以在keil调试过程中通过Debug串口输出数据
-//	但是要求是5线SWD接口 也就是有SWO的SWD接口 我们常用的4线接口不行
+//	SWO接口版本的printf函数 可以在keil调试过程中�?�过Debug串口输出数据
+//	但是要求�?5线SWD接口 也就是有SWO的SWD接口 我们常用�?4线接口不�?
 //*/
 //#define ITM_Port8(n)    (*((volatile unsigned char *)(0xE0000000+4*n)))
 //#define ITM_Port16(n)   (*((volatile unsigned short*)(0xE0000000+4*n)))
@@ -189,6 +189,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
+  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -242,7 +243,7 @@ int main(void)
 		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
 		HAL_ADC_Start_DMA(&hadc2,(uint32_t*)adc_plot,64);
 		
-		//延迟等待一次ADC完成
+		//延迟等待�?次ADC完成
 		HAL_Delay(100);
 		
 		han_win(adc_plot,64);		
@@ -273,18 +274,15 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
 
-  /**Supply configuration update enable 
+  /** Supply configuration update enable 
   */
-  MODIFY_REG(PWR->CR3, PWR_CR3_SCUEN, 0);
-  /**Configure the main internal regulator output voltage 
+  HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
+  /** Configure the main internal regulator output voltage 
   */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
-  while ((PWR->D3CR & (PWR_D3CR_VOSRDY)) != PWR_D3CR_VOSRDY) 
-  {
-    
-  }
-  /**Initializes the CPU, AHB and APB busses clocks 
+  while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
@@ -303,7 +301,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /**Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2

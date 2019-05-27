@@ -1,6 +1,7 @@
 --cpu Cortex-M7.fp.dp
 ".\test\startup_stm32h743xx.o"
 ".\test\dac_gen.o"
+".\test\fft.o"
 ".\test\main.o"
 ".\test\gpio.o"
 ".\test\adc.o"
@@ -10,7 +11,6 @@
 ".\test\usart.o"
 ".\test\stm32h7xx_it.o"
 ".\test\stm32h7xx_hal_msp.o"
-".\test\fft.o"
 ".\test\stm32h7xx_hal_adc.o"
 ".\test\stm32h7xx_hal_adc_ex.o"
 ".\test\stm32h7xx_hal_cortex.o"
@@ -35,7 +35,7 @@
 ".\test\stm32h7xx_hal_i2c.o"
 ".\test\stm32h7xx_hal_i2c_ex.o"
 ".\test\system_stm32h7xx.o"
-"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Lib\ARM\arm_cortexM7lfdp_math.lib"
+"C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\DSP\Lib\ARM\arm_cortexM7lfdp_math.lib"
 --library_type=microlib --strict --scatter ".\test\test.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
