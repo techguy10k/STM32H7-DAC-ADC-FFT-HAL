@@ -5,3 +5,13 @@ STM32H7系列HAL库文档.pdf
 MDK-ARM/test.uvguix.Admin
 *.d
 *.o
+*.axf
+*.htm
+*.hex
+*.lnp
+*.dep
+*.sct
+*.map
+*.lst
+MDK-ARM/JLinkLog.txt
+MDK-ARM/JLinkSettings.ini
