@@ -6,7 +6,7 @@
   ******************************************************************************
   ** This notice applies to any and all portions of this file
   * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
+  * USER CODE END. Other portions of this file, whether
   * inserted by the user or by software development tools
   * are owned by their respective copyright owners.
   *
@@ -94,12 +94,12 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{	
-	if(GPIO_Pin == USER_Btn_Pin)
-	{
-		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-		HAL_Delay(500);
-	}
+{
+  if(GPIO_Pin == USER_Btn_Pin)
+    {
+      HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
+      HAL_Delay(500);
+    }
 }
 
 
@@ -107,22 +107,22 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 #else
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
-#endif 
+#endif
 
 
 /* printf重定向到串口3 */
 int fputc(int ch,FILE *f)
 {
-    uint8_t temp[1]={ch};
-    HAL_UART_Transmit(&huart3,temp,1,10);        //UartHandle是串口的句柄
-		return ch;
+  uint8_t temp[1]= {ch};
+  HAL_UART_Transmit(&huart3,temp,1,10);        //UartHandle是串口的句柄
+  return ch;
 }
 
 
 PUTCHAR_PROTOTYPE
 {
-	HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,10);
-	return ch;
+  HAL_UART_Transmit(&huart3,(uint8_t*)&ch,1,10);
+  return ch;
 }
 /* ********************************************* */
 
@@ -167,11 +167,11 @@ PUTCHAR_PROTOTYPE
 */
 void HAL_ADC_ErrorCallback(ADC_HandleTypeDef * hadc)
 {
-	if(hadc->Instance == ADC2)
-	{
-		//调用该函数有清overrun标志位作�? 详见HAL文档
-		HAL_ADC_Stop_DMA(hadc);
-	}
+  if(hadc->Instance == ADC2)
+    {
+      //调用该函数有清overrun标志位作�? 详见HAL文档
+      HAL_ADC_Stop_DMA(hadc);
+    }
 }
 
 
@@ -189,7 +189,7 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
+
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -216,51 +216,153 @@ int main(void)
   MX_TIM3_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-	
-	
-	
-	HAL_TIM_Base_Start(&htim6);
-	HAL_TIM_Base_Start(&htim3);
-	
-	HAL_ADCEx_Calibration_Start(&hadc2,ADC_CALIB_OFFSET_LINEARITY,ADC_SINGLE_ENDED);
-	
-	dac_plot_countinue(Plot_Bank0,250,0.00002,&DAC_Status);
-	
-	dac_gomid(&hdac1);	
-	HAL_Delay(1000);
-	
-	DAC_Status.DAC_Plotting_Bank = DAC_Plotting_Bank_Bank1;
-	DAC_Status.DAC_Status = DAC_Status_Busy;
-	
+
+
+
+  HAL_TIM_Base_Start(&htim6);
+  HAL_TIM_Base_Start(&htim3);
+
+  //HAL_ADCEx_Calibration_Start(&hadc2,ADC_CALIB_OFFSET_LINEARITY,ADC_SINGLE_ENDED);
+
+  //dac_plot_countinue(Plot_Bank0,250,0.00002,&DAC_Status);
+
+  //dac_gomid(&hdac1);
+  HAL_Delay(1000);
+
+  DAC_Status.DAC_Plotting_Bank = DAC_Plotting_Bank_Bank1;
+  DAC_Status.DAC_Status = DAC_Status_Busy;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {
-		
-		HAL_Delay(500);
-		HAL_GPIO_TogglePin(LD2_GPIO_Port,LD2_Pin);
-		HAL_ADC_Start_DMA(&hadc2,(uint32_t*)adc_plot,64);
-		
-		//延迟等待�?次ADC完成
-		HAL_Delay(100);
-		
-		han_win(adc_plot,64);		
-		
-		fast_rfft_64(adc_plot,fftouttable);
-		
-		for(string_counter = 0;string_counter < 32;string_counter ++)
-		{
-			printf("%f\r\n" , magoutput[string_counter]);
-		}
+    {
+      HAL_Delay(500);
+			uint16_t Counter = 1;
+			
+			//256Hz
+			printf("256Hz\r\n");
+      while(Counter < 196)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*256*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
 				
-		while(1);
+			//448Hz
+			printf("448Hz\r\n");
+      while(Counter < 112)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*448*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
 				
-    /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
-  }
+			//640Hz
+			printf("640Hz\r\n");
+      while(Counter < 79)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*640*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
+
+			//832Hz
+			printf("832Hz\r\n");
+      while(Counter < 61)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*832*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
+
+			//1216Hz
+			printf("1216Hz\r\n");
+      while(Counter < 42)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*1216*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
+
+			//1408Hz
+			printf("1408Hz\r\n");
+      while(Counter < 36)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*1408*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
+
+			//1600Hz
+			printf("1600Hz\r\n");
+      while(Counter < 32)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*1600*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
+
+			//1792Hz
+			printf("1792Hz\r\n");
+      while(Counter < 29)
+        {
+          printf("%-4d, ",(int16_t)(500.0*sin(2*PI*1792*Counter*0.00002)));
+          Counter ++;
+					if(Counter % 10 == 0)
+					{
+						printf("\r\n");
+					}
+        }
+			Counter = 1;
+			printf("\r\n\r\n\r\n");
+	
+				
+      while(1);
+
+
+
+      /* USER CODE END WHILE */
+
+      /* USER CODE BEGIN 3 */
+    }
   /* USER CODE END 3 */
 }
 
@@ -274,15 +376,15 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
 
-  /** Supply configuration update enable 
+  /** Supply configuration update enable
   */
   HAL_PWREx_ConfigSupply(PWR_LDO_SUPPLY);
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
   while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
@@ -298,14 +400,14 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
   RCC_OscInitStruct.PLL.PLLFRACN = 0;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /** Initializes the CPU, AHB and APB busses clocks 
+    {
+      Error_Handler();
+    }
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
-                              |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
+                                |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
+                                |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
@@ -315,18 +417,18 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
+    {
+      Error_Handler();
+    }
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3|RCC_PERIPHCLK_ADC
-                              |RCC_PERIPHCLK_CKPER;
+      |RCC_PERIPHCLK_CKPER;
   PeriphClkInitStruct.CkperClockSelection = RCC_CLKPSOURCE_HSI;
   PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
   PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_CLKP;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
+    {
+      Error_Handler();
+    }
 }
 
 /* USER CODE BEGIN 4 */
@@ -354,7 +456,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
