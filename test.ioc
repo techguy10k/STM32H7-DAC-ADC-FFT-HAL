@@ -1,5 +1,5 @@
 #MicroXplorer Configuration settings - do not modify
-ADC2.Channel-9\#ChannelRegularConversion=ADC_CHANNEL_16
+ADC2.Channel-9\#ChannelRegularConversion=ADC_CHANNEL_DAC1CH1_ADC2
 ADC2.ClockPrescaler=ADC_CLOCK_ASYNC_DIV2
 ADC2.ContinuousConvMode=DISABLE
 ADC2.ConversionDataManagement=ADC_CONVERSIONDATA_DMA_ONESHOT
@@ -90,8 +90,8 @@ Mcu.PinsNb=12
 Mcu.ThirdPartyNb=0
 Mcu.UserConstants=
 Mcu.UserName=STM32H743ZITx
-MxCube.Version=5.2.0
-MxDb.Version=DB.5.0.20
+MxCube.Version=5.2.1
+MxDb.Version=DB.5.0.21
 NVIC.ADC_IRQn=true\:0\:0\:false\:false\:true\:true\:true
 NVIC.BusFault_IRQn=true\:0\:0\:true\:false\:true\:true\:false
 NVIC.DMA1_Stream1_IRQn=true\:2\:0\:true\:false\:true\:false\:true
